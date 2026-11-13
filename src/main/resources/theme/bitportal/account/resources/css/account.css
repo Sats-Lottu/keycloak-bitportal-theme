@@ -1,0 +1,148 @@
+:root {
+    color-scheme: light;
+    --account-bg: #f0f4f9;
+    --account-surface: #fff;
+    --account-ink: #1f1f1f;
+    --account-muted: #444746;
+    --account-line: #c4c7c5;
+    --account-accent: #0b57d0;
+    --account-accent-hover: #0846ad;
+    --account-active: #d3e3fd;
+    --pf-v5-global--BackgroundColor--100: var(--account-surface);
+    --pf-v5-global--BackgroundColor--200: var(--account-bg);
+    --pf-v5-global--Color--100: var(--account-ink);
+    --pf-v5-global--Color--200: var(--account-muted);
+    --pf-v5-global--BorderColor--100: var(--account-line);
+    --pf-v5-global--primary-color--100: var(--account-accent);
+    --pf-v5-global--link--Color: var(--account-accent);
+    --pf-v5-global--FontFamily--text: "Roboto", system-ui, sans-serif;
+    --pf-v5-global--FontFamily--heading: "Instrument Sans", system-ui, sans-serif;
+}
+
+body[data-page-id="account"],
+body[data-page-id="account"] .pf-v5-c-page,
+body[data-page-id="account"] .pf-v5-c-page__main {
+    background: var(--account-bg);
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] .pf-v5-c-masthead {
+    --pf-v5-c-masthead--BackgroundColor: var(--account-surface);
+    background: var(--account-surface);
+    border-bottom: 1px solid var(--account-line);
+}
+
+.pf-v5-c-masthead__brand img {
+    width: auto;
+    height: 2.5rem;
+    max-width: 36vw;
+    object-fit: contain;
+}
+
+.pf-v5-c-masthead .pf-v5-c-menu-toggle__text {
+    display: block;
+    max-inline-size: min(34vw, 22rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body[data-page-id="account"] .pf-v5-c-page__sidebar {
+    --pf-v5-c-page__sidebar--BackgroundColor: var(--account-bg);
+    background: var(--account-bg);
+}
+
+body[data-page-id="account"] .pf-v5-c-page__sidebar-body {
+    padding: 1.25rem .85rem;
+}
+
+body[data-page-id="account"] .pf-v5-c-nav__link {
+    border-radius: 1.5rem;
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] .pf-v5-c-nav__link.pf-m-current,
+body[data-page-id="account"] .pf-v5-c-nav__link:hover {
+    background: var(--account-active);
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] .pf-v5-c-nav__link::after {
+    display: none;
+}
+
+body[data-page-id="account"] .pf-v5-c-page__main-section.pf-m-light {
+    width: 100%;
+    max-width: 62rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3.25rem);
+    background: transparent;
+}
+
+body[data-page-id="account"] [data-testid="page-heading"] {
+    margin-block-start: .7rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.55rem);
+    font-weight: 500;
+    letter-spacing: -.04em;
+}
+
+body[data-page-id="account"] .pf-v5-c-page__main-section .pf-v5-c-form:has(#save-btn) {
+    --pf-v5-c-form--m-horizontal__group-label--md--GridColumnWidth: minmax(9rem, 23%);
+    padding: clamp(1.25rem, 4vw, 2.3rem);
+    background: var(--account-surface);
+    border: 1px solid var(--account-line);
+    border-radius: 1.65rem;
+}
+
+body[data-page-id="account"] .pf-v5-c-form-control {
+    --pf-v5-c-form-control--BackgroundColor: var(--account-surface);
+    border: 1px solid var(--account-line);
+    border-radius: .45rem;
+}
+
+body[data-page-id="account"] .pf-v5-c-form-control:not(.pf-m-error)::before,
+body[data-page-id="account"] .pf-v5-c-form-control:not(.pf-m-error)::after {
+    display: none;
+}
+
+body[data-page-id="account"] .pf-v5-c-form-control > :is(input, textarea):focus {
+    outline: 0;
+}
+
+body[data-page-id="account"] .pf-v5-c-form-control:focus-within {
+    outline: 2px solid var(--account-accent);
+    outline-offset: -1px;
+}
+
+body[data-page-id="account"] .pf-v5-c-button.pf-m-primary {
+    --pf-v5-c-button--m-primary--BackgroundColor: var(--account-accent);
+    --pf-v5-c-button--m-primary--hover--BackgroundColor: var(--account-accent-hover);
+    border-radius: 999px;
+    padding-inline: 1.3rem;
+}
+
+body[data-page-id="account"] .pf-v5-c-button.pf-m-link {
+    color: var(--account-accent);
+}
+
+body[data-page-id="account"] .pf-v5-c-masthead :is(.pf-v5-c-menu-toggle, .pf-v5-c-button.pf-m-plain) {
+    color: var(--account-ink);
+    background: var(--account-surface);
+}
+
+body[data-page-id="account"] .pf-v5-c-masthead :is(.pf-v5-c-menu-toggle__text, .pf-v5-c-menu-toggle__icon) {
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] :is(.pf-v5-c-jump-links, .pf-v5-c-sidebar__sidebar):has(.pf-v5-c-jump-links__list) {
+    background: var(--account-surface);
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] .pf-v5-c-jump-links__link {
+    color: var(--account-ink);
+}
+
+body[data-page-id="account"] .pf-v5-c-form__group:has([name="username"]:is(:read-only, :disabled)) .pf-v5-c-form__label-required {
+    display: none;
+}

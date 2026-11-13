@@ -1,0 +1,12 @@
+{
+  "name": "keycloak-bitportal-theme-e2e",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test --workers=1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

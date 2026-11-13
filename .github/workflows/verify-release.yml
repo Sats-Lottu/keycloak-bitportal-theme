@@ -1,0 +1,71 @@
+name: Verify and release
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify release ref
+        if: github.ref_type == 'tag'
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          git merge-base --is-ancestor "$GITHUB_SHA" refs/remotes/origin/main
+      - name: Verify the standalone theme in Keycloak
+        run: docker compose --profile test up --build --abort-on-container-exit --exit-code-from tests
+      - name: Prepare release files
+        if: github.ref_type == 'tag'
+        run: |
+          mkdir release
+          jar="keycloak-bitportal-theme-${GITHUB_REF_NAME#v}.jar"
+          container="$(docker compose ps -aq keycloak)"
+          docker cp "$container:/opt/keycloak/providers/$jar" "release/$jar"
+          cd release
+          sha256sum -- *.jar > SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: github.ref_type == 'tag'
+        with:
+          name: theme-release
+          path: release/
+          if-no-files-found: error
+          retention-days: 1
+      - name: Remove test containers
+        if: always()
+        run: docker compose --profile test down -v
+
+  publish:
+    if: github.ref_type == 'tag'
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    concurrency:
+      group: theme-release-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: theme-release
+          path: release/
+      - name: Publish tested JAR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cd release
+          sha256sum --check SHA256SUMS
+          gh release create "$GITHUB_REF_NAME" ./*.jar SHA256SUMS \
+            --verify-tag --generate-notes --title "$GITHUB_REF_NAME"

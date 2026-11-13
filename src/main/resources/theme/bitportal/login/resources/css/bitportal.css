@@ -1,0 +1,238 @@
+:root {
+    --theme-bg: #f0f4f9;
+    --theme-ink: #1f1f1f;
+    --theme-accent: #0b57d0;
+    --theme-line: #c4c7c5;
+    --theme-input: #fff;
+    --keycloak-card-top-color: transparent;
+}
+
+.login-pf body,
+.pf-v5-c-login {
+    min-height: 100vh;
+    background: var(--theme-bg);
+    color: var(--theme-ink);
+    font-family: "Roboto", system-ui, sans-serif;
+}
+
+.pf-v5-c-login__container {
+    position: relative;
+    inline-size: min(100%, 68rem);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "main";
+    margin-inline: auto;
+    padding: 1.5rem;
+}
+
+#kc-header {
+    z-index: 1;
+    grid-area: main;
+    align-self: start;
+    justify-self: start;
+    margin: 2rem 0 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+#kc-header-wrapper {
+    --pf-v5-global--Color--light-100: #1f1f1f;
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    font-weight: 650;
+    font-size: 1.15rem;
+    letter-spacing: -.035em;
+    text-transform: none;
+}
+
+#kc-header-wrapper::before {
+    content: "";
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: .6rem;
+    background: linear-gradient(145deg, #4285f4, #0b57d0 70%);
+}
+
+.pf-v5-c-login__main {
+    display: grid;
+    grid-template-columns: minmax(0, .88fr) minmax(0, 1fr);
+    column-gap: clamp(1rem, 4vw, 3rem);
+    padding: 2rem clamp(2rem, 5vw, 3.5rem) 2.5rem;
+    border-radius: 1.75rem;
+    background: #fff;
+    box-shadow: 0 .2rem 1.1rem #23304413;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-header {
+    display: block;
+    grid-row: span 2;
+    padding: 4rem 0 0;
+    border: 0;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-body {
+    min-width: 0;
+    padding: 2.2rem 0 0;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-footer {
+    grid-column: 2;
+    padding: 0;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-footer:empty {
+    display: none;
+}
+
+#kc-page-title {
+    color: var(--theme-ink);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 450;
+    letter-spacing: -.045em;
+    line-height: 1.14;
+}
+
+.pf-v5-c-login__main-header-utilities {
+    width: min(12rem, 100%);
+    max-width: 100%;
+    margin-block-start: 1.15rem;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control {
+    border: 1px solid #747775;
+    min-height: 3rem;
+    border-radius: .3rem;
+}
+
+.pf-v5-c-login__main a {
+    color: var(--theme-accent);
+}
+
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-primary {
+    --pf-v5-c-button--m-primary--BackgroundColor: var(--theme-accent);
+    --pf-v5-c-button--m-primary--hover--BackgroundColor: #0846ad;
+    --pf-v5-c-button--m-primary--focus--BackgroundColor: #0846ad;
+    --pf-v5-c-button--m-primary--active--BackgroundColor: #063b92;
+    min-height: 2.55rem;
+    border-radius: 999px;
+    padding-inline: 1.4rem;
+}
+
+#kc-login {
+    display: block;
+    width: auto;
+    margin-inline-start: auto;
+}
+
+#kc-social-providers .pf-v5-c-button,
+.bitportal-registration .pf-v5-c-button {
+    border-radius: 999px;
+}
+
+.pf-v5-c-login__main :is(a, button, summary):focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 3px;
+}
+
+:is(#kc-lnurl-auth, form[data-status][data-expired]), :is(#kc-nostr-auth, form[data-verify][data-signing]) {
+    display: grid;
+    gap: .9rem;
+    margin-block-end: 1rem;
+}
+
+:is(#kc-lnurl-auth, form[data-status][data-expired]) {
+    justify-items: center;
+    text-align: center;
+}
+
+:is(#kc-lnurl-auth, form[data-status][data-expired]) svg {
+    max-inline-size: 100%;
+    block-size: auto;
+    border-radius: .7rem;
+}
+
+:is(#kc-nostr-auth, form[data-verify][data-signing]) details {
+    padding: 1rem;
+    border: 1px solid var(--theme-line);
+    border-radius: .9rem;
+}
+
+:is(#kc-nostr-auth, form[data-verify][data-signing]) summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+:is(#kc-nostr-auth, form[data-verify][data-signing]) details label,
+:is(#kc-nostr-auth, form[data-verify][data-signing]) details input,
+:is(#kc-nostr-auth, form[data-verify][data-signing]) details button {
+    display: block;
+    inline-size: 100%;
+    margin-block-start: .75rem;
+}
+
+:is(#kc-nostr-auth, form[data-verify][data-signing]) details input {
+    padding: .65rem;
+    border: 1px solid var(--theme-line);
+    border-radius: .45rem;
+    background: var(--theme-input);
+    color: inherit;
+}
+
+.bitportal-registration {
+    padding-block-start: 1rem;
+    border-top: 1px solid var(--theme-line);
+}
+
+.bitportal-registration h2 {
+    margin-block-end: .75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.bitportal-registration ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    list-style: none;
+    padding: 0;
+}
+
+@media (max-width: 740px) {
+    .pf-v5-c-login__container {
+        padding: 0;
+    }
+
+    #kc-header {
+        margin: 1.55rem 0 0 1.5rem;
+    }
+
+    .pf-v5-c-login__main {
+        display: block;
+        padding: 1.5rem;
+        border-radius: 0;
+    }
+
+    .pf-v5-c-login__main > .pf-v5-c-login__main-header {
+        padding-block-start: 3.5rem;
+    }
+
+    .pf-v5-c-login__main > .pf-v5-c-login__main-body {
+        padding-block-start: 1.5rem;
+    }
+
+    .pf-v5-c-login__main-header-utilities {
+        margin-block-start: .75rem;
+    }
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control:not(.pf-m-error)::before,
+.pf-v5-c-login__main .pf-v5-c-form-control:not(.pf-m-error)::after {
+    display: none;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control:focus-within {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: -1px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control > :is(input, select, textarea):focus {
+    outline: 0;
+}
